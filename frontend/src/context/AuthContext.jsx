@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
-      api.get('/auth/me')
+      api.get('api/auth/me')
         .then(res => {
           setUser(res.data.user)
           localStorage.setItem('user', JSON.stringify(res.data.user))
