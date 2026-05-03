@@ -34,7 +34,15 @@ app.get("/", (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'TaskFlow API is running' });
 });
+const path = require('path');
 
+// Serve frontend build
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// React fallback (IMPORTANT)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 // ================= ERROR HANDLER =================
 app.use((err, req, res, next) => {
   console.error(err.stack);
